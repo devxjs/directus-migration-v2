@@ -1,0 +1,38 @@
+{
+    "name": "directus-migration-v2",
+    "version": "0.0.8",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack --config ./webpack.config.mjs"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ducdao-codihaus/directus-migration-v2.git"
+    },
+    "author": "DucDao - Codihaus",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ducdao-codihaus/directus-migration-v2/issues"
+    },
+    "type": "module",
+    "homepage": "https://github.com/ducdao-codihaus/directus-migration-v2#readme",
+    "devDependencies": {
+        "@directus/api": "^10.2.0",
+        "@directus/types": "^10.0.1",
+        "@types/node": "^14.0.0",
+        "typescript": "^4.0.2",
+        "uglify-js": "^3.17.4",
+        "webpack": "^5.83.1",
+        "webpack-cli": "^5.1.1"
+    },
+    "files": [
+        "data/*",
+        "utils/*",
+        "helpers/*",
+        "services/*",
+        "index.js",
+        "yarn.lock"
+    ]
+}
