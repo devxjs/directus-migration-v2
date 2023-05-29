@@ -88,10 +88,12 @@ export class MigrationClass {
 		})
 
 		let fieldsDown = collections.reduce((pre , current) => {
-			return [
-				...pre ,
-				...current.fields.filter(item => item?.schema?.is_primary_key !== true)
-			]
+			if(current?.fields){
+				return [
+					...pre ,
+					...current.fields.filter(item => item?.schema?.is_primary_key !== true)
+				]
+			}
 		} , [])
 
 		if (update.fields && update.fields.length > 0) {
