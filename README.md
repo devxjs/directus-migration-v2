@@ -1,18 +1,19 @@
 ## Installation
 
-`npm i directus-migration-tools`
+`npm i directus-migration-v2`
 
 ## Usage
 
 ### Schema Config
 
-The file name follows the following structure: `[identifier]-[name].js` for example: `20201202A-my-custom-migration.js`
+The file name follows the following structure: `[identifier]-[name].mjs` for example: `20201202A-my-custom-migration.
+mjs`
 
 > **Note**: All migration files must be located in the Directus `extensions/migrations` folder.
 
 ### How To Create Normal Fields
 
-Structure: `[field_name]: generateField.genNormal: (type, options)`
+Structure: `field_name : generateField.genNormal: (type, options)`
 
 > **Require**: type
 
@@ -93,7 +94,7 @@ thumbnail: generateSpecField.image()
                         hidden: true,
                     },
                 }
-            ),
+            )
 ```
 
 -   Many to many:
@@ -141,13 +142,15 @@ menu_items: generateField.generateO2m("menu_item", {
 
 ### Create Config Example
 
--   File name: `CDH20230425A-create.js`
+-   File name: `CDH20230425A-create.mjs`
 
 ```javascript
-const {
+import {
     generateField,
     generateSpecField,
-} = require("directus-migration-tools");
+    upCreateKnex,
+    downCreateKnex
+} from 'directus-migration-v2'
 
 export const defaultFields = {
     id: generateField.genPrimaryKey(),
@@ -297,19 +300,29 @@ export const config = [
         },
     },
 ];
+
+export const up = async (knex)=>{
+    await upCreateKnex(knex, config);
+}
+
+export const down = async (knex)=>{
+    await downCreateKnex(knex, config);
+}
+
 ```
 
 ### Update Config Example:
 
--   File name: `CDH20230425B-update.js`
+-   File name: `CDH20230425B-update.mjs`
 
 ```javascript
-const {
-    generateField,
+
+import {
+	generateField,
     generateSpecField,
     upUpdateKnex,
-    downUpdateKnex,
-} = require("directus-migration-tools");
+    downUpdateKnex
+} from 'directus-migration-v2'
 
 const config = [
     {
@@ -368,14 +381,14 @@ const config = [
     },
 ];
 
-module.exports = {
-    async up(knex) {
-        await upUpdateKnex(knex, config);
-    },
-    async down(knex) {
-        await downUpdateKnex(knex, config);
-    },
-};
+
+export const up = async (knex)=>{
+    await upUpdateKnex(knex, config);
+}
+
+export const down = async (knex)=>{
+    await downUpdateKnex(knex, config);
+}
 ```
 
 > **Note** Migrations have to export an `up` and a `down` function. These functions get a [Knex](http://knexjs.org/) instance that can be used to do virtually whatever.
