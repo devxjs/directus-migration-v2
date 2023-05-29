@@ -64,15 +64,18 @@ export class SchemaService {
 	async createOne(type , data) {
 		return this.load(type).then(async (service) => {
 
-			await service.createOne(data)
+
 			switch (type) {
 				case "collection":
+					await service.createOne(data)
 					console.log(`Created collection: [${data.collection}]`)
 					break;
 				case "field":
+					await service.createField(data.collection,data)
 					console.log(`Created field: ${data.field} [${data.collection}]`)
 					break;
 				case "relation":
+					await service.createOne(data)
 					console.log(`Created relation: [${data.collection}] -> ${data.field} <- [${data.related_collection}]`)
 					break;
 			}

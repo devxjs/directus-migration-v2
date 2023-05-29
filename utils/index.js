@@ -154,7 +154,7 @@ export const generateData = (collections_parse , directus_data, options) => {
 				switch (field.type) {
 					case "$M2O$":
 						let field_related = fields_primary.find(item => item.collection === field.related_collection) || fields_primary_directus.find(item => item.collection === field.related_collection)
-						field.type = field_related.type || "integer" || "string"
+						field.type = field_related?.type || "integer" || "string"
 						relations_migration.push(relationM2o(field.collection , field.field , field.related_collection , field_related.field , field?.relations_options))
 						if(field.field_o2m){
 							if(field.field_o2m.create && field.field_o2m.field_name){

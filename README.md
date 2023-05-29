@@ -72,7 +72,7 @@ translations: generateSpecField.translations(
 -   Create field with interface Image:
 
 ```javascript
-thumbnail: generateSpecField.image(),
+thumbnail: generateSpecField.image()
 ```
 
 ### How To Create Related Fields
@@ -103,8 +103,8 @@ generateM2m: related_collection,
     temp_collection,
     options,
     {
-        field_left: [field_left],
-        field_right: [field_right],
+        field_left: field_left,
+        field_right: field_right,
         fields_data,
     };
 ```
@@ -121,7 +121,7 @@ related: generateField.generateM2m("test","junction_test",{},{
             title: generateField.genNormal() ,
             url: generateField.genNormal() ,
         }
-    }),
+    })
 ```
 
 -   One to many: `generateO2m: (related_collection,related_field ,options)`

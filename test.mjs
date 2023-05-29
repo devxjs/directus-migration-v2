@@ -4,41 +4,89 @@ import {
 } from './index.js'
 import {convertConfig} from "./utils/index.js";
 
-let config = [
+const config = [
 	{
 		collection: {
-			name: "test"
-		} ,
+			name: "System",
+		},
+	},
+	{
+		collection: {
+			name: "provinces",
+			meta: {
+				group: "System"
+			}
+		},
 		fields: {
-			id: generateField.genPrimaryKey() ,
-			title: generateField.genNormal() ,
-			content: generateSpecField.textArea()
+			id: generateField.genPrimaryKey(),
+			source_id: generateField.genNormal(),
+			name: generateField.genNormal(),
+			parent_id: generateField.generateM2o("provinces", {
+				field_o2m: {
+					create: true,
+					field_name: "districts",
+				},
+			}),
+			user_updated: generateSpecField.dateUpdated(),
+			date_created: generateSpecField.dateCreated(),
+			date_updated: generateSpecField.dateUpdated(),
 		}
 	},
 	{
 		collection: {
-			name: "test2"
-		} ,
+			name: "areas",
+			meta: {
+				group: "System"
+			}
+		},
 		fields: {
-			id: generateField.genPrimaryKey() ,
-			title: generateField.genNormal() ,
-			content: generateSpecField.textArea(),
-			related: generateField.generateM2m("test","junction_test",{},{
-				field_left: "test2_id",
-				field_right: "test_id",
-				fields_data: {
-					title: generateField.genNormal() ,
-					url: generateField.genNormal() ,
-				}
-			}),
-			field_m2o: generateField.generateM2o("test",{
+			id: generateField.genPrimaryKey(),
+			source_id: generateField.genNormal(),
+			name: generateField.genNormal(),
+			parent_id: generateField.generateM2o("zone", {
 				field_o2m: {
-					create: true ,
-					field_name: "test2_list" ,
-				} ,
-			})
+					create: true,
+					field_name: "areas",
+				},
+			}),
+			user_updated: generateSpecField.dateUpdated(),
+			date_created: generateSpecField.dateCreated(),
+			date_updated: generateSpecField.dateUpdated(),
 		}
-	}
+	},
+	{
+		collection: {
+			name: "route",
+			meta: {
+				group: "System"
+			}
+		},
+		fields: {
+			id: generateField.genPrimaryKey(),
+			source_id: generateField.genNormal(),
+			name: generateField.genNormal(),
+			user_updated: generateSpecField.dateUpdated(),
+			date_created: generateSpecField.dateCreated(),
+			date_updated: generateSpecField.dateUpdated(),
+		}
+	},
+	{
+		collection: {
+			name: "banks",
+			meta: {
+				group: "System"
+			}
+		},
+		fields: {
+			id: generateField.genPrimaryKey(),
+			source_id: generateField.genNormal(),
+			short_name: generateField.genNormal(),
+			name: generateField.genNormal(),
+			user_updated: generateSpecField.dateUpdated(),
+			date_created: generateSpecField.dateCreated(),
+			date_updated: generateSpecField.dateUpdated(),
+		}
+	},
 ]
 
 
