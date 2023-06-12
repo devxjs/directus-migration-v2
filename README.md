@@ -392,3 +392,5 @@ export const down = async (knex)=>{
 ```
 
 > **Note** Migrations have to export an `up` and a `down` function. These functions get a [Knex](http://knexjs.org/) instance that can be used to do virtually whatever.
+> **Note** v0.0.15+:  generateField.generateM2m(related_collection , temp_collection ,options , fields_extend ) -> 
+> generateField.generateM2m(related_collection , temp_collection , fields_extend,options ) 

@@ -21,10 +21,10 @@ export class MigrationClass {
 				meta: options?.meta || {} ,
 				schema: options?.schema || {}
 			}) ,
-			generateM2m: (related_collection , temp_collection , options , fields_extend) => utils.fieldM2m(related_collection , temp_collection , {
+			generateM2m: (related_collection , temp_collection , fields_extend, options ) => utils.fieldM2m(related_collection , temp_collection , fields_extend, {
 				meta: options?.meta || {} ,
 				schema: options?.schema || {}
-			} , fields_extend) ,
+			} ) ,
 			generateO2m: (related_collection , related_field , options) => utils.fieldO2m(related_collection , related_field , {
 				meta: options?.meta || {} ,
 				schema: options?.schema || {}

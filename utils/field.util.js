@@ -289,7 +289,7 @@ export const fields_directus = {
 		}
 	}) ,
 
-	files: (temp_collection,options) => fieldM2m("directus_files" ,temp_collection, {
+	files: (temp_collection,options) => fieldM2m("directus_files" ,temp_collection, {},{
 		meta: {
 			interface: "files" ,
 			special: ["files"] ,
@@ -431,7 +431,7 @@ export const fieldM2o = (related_collection , options , relations_options) => {
 	}
 }
 
-export const fieldM2m = (related_collection , temp_collection , options , fields_extend) => {
+export const fieldM2m = (related_collection , temp_collection , fields_extend, options) => {
 	return {
 		//type: "alias",
 		type: "$M2M$" ,
