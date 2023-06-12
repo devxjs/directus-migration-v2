@@ -211,6 +211,7 @@ export const fields_directus = {
 		meta: {
 			interface: "file-image" ,
 			special: ["file"],
+			display: "image",
 			...(options?.meta || {})
 		} ,
 		schema: {
