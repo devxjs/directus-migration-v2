@@ -39,7 +39,7 @@ export const parseCollections = (data) => {
 
 			let output = {
 				collection: item.collection.name ,
-				fields: parseFields(item.collection.name , item.fields) ,
+				fields: parseFields(item.collection , item.fields) ,
 				meta: {
 					...collection_meta ,
 					...item.collection?.meta
@@ -64,10 +64,13 @@ export const parseCollections = (data) => {
 export const parseFields = (collection , fields) => {
 	try {
 		let output = []
-		for (let field in fields) {
+		let collection_name = collection.name || collection.collection
+		let auto_sort = collection.auto_sort ?? false
+		let sort_index = 1
 
+		for (let field in fields) {
 			let field_parse = {
-				"collection": collection ,
+				"collection": collection_name ,
 				"field": field ,
 				"type": fields[field].type ?? 'string' ,
 				"meta": {
@@ -100,6 +103,11 @@ export const parseFields = (collection , fields) => {
 
 			if (fields[field].field_o2m) {
 				field_parse["field_o2m"] = fields[field].field_o2m
+			}
+
+			if(auto_sort){
+				field_parse.meta["sort"] = sort_index
+				sort_index++
 			}
 
 			output.push(field_parse);
@@ -182,8 +190,8 @@ export const generateData = (collections_parse , directus_data, options) => {
 							}
 						})
 
-
 						collections_parse.push(collection_temp)
+
 						let field_primary_temp = {
 							collection: collection_temp.collection ,
 							field: "id" ,
@@ -255,7 +263,7 @@ export const generateData = (collections_parse , directus_data, options) => {
 
 						if (field?.fields_extend?.fields_data) {
 
-							let fields_extend = parseFields(collection_temp.collection , field.fields_extend.fields_data)
+							let fields_extend = parseFields(collection_temp , field.fields_extend.fields_data)
 
 							if(field?.fields_extend?.field_left || field?.fields_extend?.field_right){
 								let name_left = field?.fields_extend?.field_left
