@@ -370,7 +370,7 @@ export const fields_directus = {
 		}
 	}) ,
 
-	translations: (collection_language,temp_collection, fields, options) => fieldM2m(collection_language ,temp_collection, {
+	translations: (collection_language,temp_collection, fields, options) => fieldM2m(collection_language ,temp_collection, fields, {
 		meta: {
 			special: ["translations"] ,
 			interface: "translations",
@@ -379,7 +379,7 @@ export const fields_directus = {
 		schema: {
 			... (options?.schema || {})
 		}
-	}, fields)
+	})
 }
 
 export const fieldNormal = (type = "string" , options) => {
