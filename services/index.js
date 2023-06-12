@@ -64,6 +64,11 @@ export class MigrationClass {
 
 			if (!collections) throw new Error("[!]----[Error]: upCreateKnex -> collections not found")
 
+			console.log("CollectionsDown: " , JSON.stringify(collections, null , 4))
+			console.log("FieldsDown: " ,  JSON.stringify(relations, null , 4))
+			console.log("Update: " ,  JSON.stringify(update, null , 4))
+
+
 			return this.schemaClass.createMany("collection" , collections).then(async () => {
 				await this.schemaClass.createMany("relation" , relations)
 				if (update) {

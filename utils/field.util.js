@@ -210,9 +210,11 @@ export const fields_directus = {
 	image: (options) => fieldM2o("directus_files" , {
 		meta: {
 			interface: "file-image" ,
+			special: ["file"],
 			...(options?.meta || {})
 		} ,
 		schema: {
+			data_type: 'char',
 			...(options?.schema || {})
 		}
 	}) ,
