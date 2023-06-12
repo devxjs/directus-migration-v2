@@ -24,7 +24,7 @@ export class MigrationClass {
 			generateM2m: (related_collection , temp_collection , fields_extend, options ) => utils.fieldM2m(related_collection , temp_collection , fields_extend, {
 				meta: options?.meta || {} ,
 				schema: options?.schema || {}
-			} ) ,
+			}) ,
 			generateO2m: (related_collection , related_field , options) => utils.fieldO2m(related_collection , related_field , {
 				meta: options?.meta || {} ,
 				schema: options?.schema || {}
